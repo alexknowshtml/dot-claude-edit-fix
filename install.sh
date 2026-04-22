@@ -44,7 +44,7 @@ if "PreToolUse" not in settings["hooks"]:
     settings["hooks"]["PreToolUse"] = []
 
 new_hook = {
-    "matcher": "Edit",
+    "matcher": "Edit|Write",
     "hooks": [{
         "type": "command",
         "command": "$HOOK_DEST"

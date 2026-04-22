@@ -32,8 +32,8 @@ The model receives the workaround instructions automatically and retries using `
 ## Install
 
 ```bash
-git clone https://github.com/alexknowshtml/claude-code-dot-claude-edit-fix
-cd claude-code-dot-claude-edit-fix
+git clone https://github.com/alexknowshtml/dot-claude-edit-fix
+cd dot-claude-edit-fix
 ./install.sh
 ```
 

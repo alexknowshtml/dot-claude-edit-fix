@@ -1,4 +1,4 @@
-# Claude Code .claude/ Edit Workaround
+# Claude Code `.claude/` Edit Workaround
 
 A hook that lets Claude autonomously edit files in the `.claude/` directory despite a bug blocking it.
 
@@ -32,8 +32,8 @@ The model receives the workaround instructions automatically and retries using `
 ## Install
 
 ```bash
-git clone https://github.com/alexknowshtml/claude-skill-edit-fix
-cd claude-skill-edit-fix
+git clone https://github.com/alexknowshtml/claude-code-dot-claude-edit-fix
+cd claude-code-dot-claude-edit-fix
 ./install.sh
 ```
 

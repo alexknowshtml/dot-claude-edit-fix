@@ -22,12 +22,16 @@ Affects macOS, Linux, and WSL across multiple Claude Code versions.
 
 ## The Fix
 
-A `PreToolUse` hook intercepts `Edit` calls on `.claude/` paths *before* they hit the safeguard. It:
+Two `PreToolUse` hooks cover the two blocked code paths:
+
+**`hooks/skill-edit-workaround.sh`** — intercepts `Edit`/`Write` calls on `.claude/` paths *before* they hit the safeguard. It:
 
 1. **Denies the Edit** cleanly (before the confusing safeguard error)
 2. **Injects `additionalContext`** into the model explaining the bug and a Python-based workaround
 
 The model receives the workaround instructions automatically and retries using `python3` via Bash — no user intervention needed.
+
+**`hooks/claude-dir-mkdir-allow.sh`** — intercepts `Bash` calls where the command contains `mkdir` targeting a `.claude/` path. The `Edit`/`Write` hook doesn't cover this code path, so `mkdir .claude/somedir` would still trigger a permission prompt without this second hook. It auto-approves those commands by returning `permissionDecision: "allow"`.
 
 ## Install
 
@@ -64,7 +68,7 @@ The model reads the `additionalContext` and uses Python to make the edit instead
 
 ## Uninstall
 
-Remove the hook entry from `~/.claude/settings.json` under `hooks.PreToolUse`, and delete `~/.claude/hooks/skill-edit-workaround.sh`.
+Remove both hook entries from `~/.claude/settings.json` under `hooks.PreToolUse`, and delete `~/.claude/hooks/skill-edit-workaround.sh` and `~/.claude/hooks/claude-dir-mkdir-allow.sh`.
 
 ## Status
 
